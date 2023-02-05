@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/NatalieShamir/around-express/issues"
   },
-  "homepage": "https://github.com/NatalieShamir/around-express#readme"
+  "homepage": "https://github.com/NatalieShamir/around-express#readme",
+  "devDependencies": {
+    "eslint": "^8.33.0",
+    "eslint-plugin-import": "^2.27.5"
+  }
 }
