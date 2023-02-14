@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
   fs.readFile(dataPath, { encoding: 'utf-8' })
     .then((users) => {
       const data = JSON.parse(users);
-      const user = data.find((user) => user._id === id.trim());
+      const user = data.find((user) => user._id === id.trim());//eslint-disable-line
 
       if (user) {
         res.send(user);
