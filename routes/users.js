@@ -9,9 +9,9 @@ const dataPath = path.join(__dirname, '../data/users.json');
 router.get('/', (req, res) => {
   fs.readFile(dataPath, { encoding: 'utf-8' })
     .then((users) => {
-      res.send({ data: users });
+      res.send(JSON.parse(users));
     })
-    .catch(() => res.send({}).status(500));
+    .catch(() => res.status(500).send({ message: 'We have encountered an error' }));
 });
 
 router.get('/:id', (req, res) => {

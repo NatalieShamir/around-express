@@ -9,7 +9,7 @@ const dataPath = path.join(__dirname, '../data/cards.json');
 router.get('/', (req, res) => {
   fs.readFile(dataPath, { encoding: 'utf-8' })
     .then((cards) => {
-      res.send({ data: cards });
+      res.send(JSON.parse(cards));
     })
     .catch(() => res.status(500).send({ message: 'We have encountered an error' }));
 });
