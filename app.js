@@ -1,8 +1,6 @@
 const express = require('express');
-
 const app = express();
 const { PORT = 3000 } = process.env;
-// const users = require("./data/users.json");
 const { userRouter } = require('./routes/users');
 const { cardRouter } = require('./routes/cards');
 
