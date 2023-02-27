@@ -22,5 +22,7 @@ const userSchema = new mongoose.Schema({
       validator: (v) => { return avatarRegExp.test(v) },
       message: 'Please fill-in this field'
     }
-  }
-})
+  },
+});
+
+module.exports = mongoose.model('user', userSchema);
