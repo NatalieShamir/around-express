@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const userScheme = mongoose.Schema({
+const avatarRegExp = /[(http(s)?)://(www.)?a-zA-Z0-9@:%.+~#=]{2,256}.[a-z]{2,6}([-a-zA-Z0-9@:%+.~#?&//=]*)/i;
+
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: 2,
@@ -15,6 +17,10 @@ const userScheme = mongoose.Schema({
   },
   avatar: {
     type: String,
-    required: true
+    required: true,
+    validate: {
+      validator: (v) => { return avatarRegExp.test(v) },
+      message: 'Please fill-in this field'
+    }
   }
 })
