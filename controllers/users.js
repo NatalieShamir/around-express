@@ -35,7 +35,6 @@ const createUser = (req, res) => {
     .then((user) => res.status(201).send({ data: user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        const { errors } = err;
         const message = `${Object.values(err.errors).map((error) => error.message).join(', ')}`;
 
         res.status(400).send({ message });
