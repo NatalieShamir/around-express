@@ -7,7 +7,9 @@ const getAllCards = (req, res) => {
 };
 
 const createCard = (req, res) => {
-  const { name, link, owner, likes } = req.body
+  const { name, link, likes } = req.body
+
+  const owner = req.user._id
 
   Card.create({ name, link, owner, likes })
     .then(card => res.status(201).send({ data: card }))
