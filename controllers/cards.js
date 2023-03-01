@@ -29,7 +29,7 @@ const deleteCard = (req, res) => {
 
   Card.findByIdAndDelete(cardId)
     .orFail(() => {
-      const error = new Error('User ID not found')
+      const error = new Error("No card found with that ID")
       error.status = 404
 
       throw error
@@ -37,7 +37,7 @@ const deleteCard = (req, res) => {
     .then((card) => res.status(200).send({ message: 'The card has been successfully deleted', data: card }))
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(400).send('Invalid ID format');
+        res.status(400).send('Invalid card ID format');
       } else if (err.status === 404) {
         res.status(404).send({ message: err.message });
       } else if (err.status === 500) {
