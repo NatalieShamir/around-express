@@ -1,33 +1,33 @@
 const mongoose = require('mongoose');
-const { AVATAR_LINK_REGEXP } = require('../constants')
+const { AVATAR_LINK_REGEXP } = require('../constants');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: [2, 'This field should contain at least 2 characters'],
     maxlength: [30, 'This field should contain maximum 30 characters'],
-    required: true
+    required: true,
   },
   link: {
     type: String,
     required: true,
     validate: {
-      validator: (v) => { return AVATAR_LINK_REGEXP.test(v) },
-      message: 'Please fill-in this field'
-    }
+      validator: (v) => AVATAR_LINK_REGEXP.test(v),
+      message: 'Please fill-in this field',
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'user'
+    ref: 'user',
   },
   likes: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
-    default: []
+    default: [],
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
 });
 
