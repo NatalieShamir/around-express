@@ -19,6 +19,14 @@ app.use('*', (req, res) => {
   res.status(404).send({ message: 'Requested resource not found' });
 });
 
+app.use((req, res, next) => {
+  req.user = {
+    _id: '63ff36be8d3ba41c9b7ff7c1'
+  };
+
+  next();
+});
+
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);//eslint-disable-line
 });
