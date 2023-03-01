@@ -1,18 +1,12 @@
 const express = require('express');
 
 const router = express.Router();
-const fs = require('fs').promises;
-const path = require('path');
 
-const dataPath = path.join(__dirname, '../data/cards.json');
+const { getAllCards, createCard, deleteCard } = require('../controllers/cards');
 
-router.get('/', (req, res) => {
-  fs.readFile(dataPath, { encoding: 'utf-8' })
-    .then((cards) => {
-      res.send(JSON.parse(cards));
-    })
-    .catch(() => res.status(500).send({ message: 'We have encountered an error' }));
-});
+router.get('/cards', getAllCards);
+router.post('/cards', createCard);
+router.delete('/cards/:cardId', deleteCard);
 
 module.exports = {
   cardRouter: router,
