@@ -4,9 +4,9 @@ const router = express.Router();
 
 const { getAllCards, createCard, deleteCard } = require('../controllers/cards');
 
-router.get('/cards', getAllCards);
-router.post('/cards', createCard);
-router.delete('/cards/:cardId', deleteCard);
+router.get('/', getAllCards);
+router.post('/', createCard);
+router.delete('/:cardId', deleteCard);
 
 module.exports = {
   cardRouter: router,
