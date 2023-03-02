@@ -2,18 +2,10 @@
 
 ## Description
 
-This project is the first in a series of projects designed to implement back-end technologies and techniques for front-end developers. It examplifies building your own API, creating a project structure and working with files.
+This project builds on the first in a series of projects designed to implement back-end technologies and techniques for front-end developers. It examplifies the first stages of working on a RESTful API for the "Around the U.S." project and connecting it to a database.
 
-## Running the Project
+## Technologies and Techniques Used
 
-`npm run start` — to launch the server.
-
-`npm run dev` — to launch the server with the hot reload feature.
-
-## Directories
-
-`/data` — JSON files to temporarily emulate database integration.
-
-`/routes` — routing files.
-
-All other directories are optional and may be created by the developer if necessary.
+- MongoDB server
+- Postman
+- MongoDB Compass
