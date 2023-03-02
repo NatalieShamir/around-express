@@ -43,8 +43,37 @@ const createUser = (req, res) => {
     });
 };
 
+const updateAvatar = (req, res) => {
+  const { avatar } = req.body;
+
+  const id = req.user._id
+
+  if (!avatar) {
+    return res.status(400).send({ message: 'Please fill-in avatar field' })
+  }
+
+  User.findByIdAndUpdate(id, { avatar }, { new: true })
+    .orFail(() => {
+      const error = new Error(`No user found with ID of ${req.user._id}`);
+      throw error;
+    })
+    .then((user) => {
+      res.send({ data: user });
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        res.status(400).send('Invalid ID format');
+      } else if (err.status === 404) {
+        res.status(404).send({ message: err.message });
+      } else if (err.status === 500) {
+        res.status(500).send({ message: 'An error has occured on the server' });
+      }
+    });
+};
+
 module.exports = {
   getAllUsers,
   getUser,
   createUser,
+  updateAvatar
 };
