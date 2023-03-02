@@ -44,7 +44,8 @@ const createUser = (req, res) => {
 };
 
 const updateUserData = (req, res) => {
-  const body = req.body;
+  const id = req.user._id;
+  const { body } = req;
 
   User.findByIdAndUpdate(id, body, { new: true })
     .orFail(() => {
@@ -65,25 +66,21 @@ const updateUserData = (req, res) => {
     });
 };
 
-const updateProfile = (req, res) => {
+const updateProfile = (req, res) => { // eslint-disable-line consistent-return
   const { name, about } = req.body;
 
-  const id = req.user._id
-
   if (!name || !about) {
-    return res.status(400).send({ message: 'Please fill-in name and about fields' })
+    return res.status(400).send({ message: 'Please fill-in name and about fields' });
   }
 
   updateUserData(req, res);
 };
 
-const updateAvatar = (req, res) => {
+const updateAvatar = (req, res) => { // eslint-disable-line consistent-return
   const { avatar } = req.body;
 
-  const id = req.user._id
-
   if (!avatar) {
-    return res.status(400).send({ message: 'Please fill-in avatar field' })
+    return res.status(400).send({ message: 'Please fill-in avatar field' });
   }
 
   updateUserData(req, res);
@@ -94,5 +91,5 @@ module.exports = {
   getUser,
   createUser,
   updateAvatar,
-  updateProfile
+  updateProfile,
 };

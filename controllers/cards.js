@@ -1,4 +1,4 @@
-const Card = require('../models/card')
+const Card = require('../models/card');
 
 const getAllCards = (req, res) => {
   Card.find({})
@@ -7,12 +7,14 @@ const getAllCards = (req, res) => {
 };
 
 const createCard = (req, res) => {
-  const { name, link, likes } = req.body
+  const { name, link, likes } = req.body;
 
-  const owner = req.user._id
+  const owner = req.user._id;
 
-  Card.create({ name, link, owner, likes })
-    .then(card => res.status(201).send({ data: card }))
+  Card.create({
+    name, link, owner, likes,
+  })
+    .then((card) => res.status(201).send({ data: card }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         const message = `${Object.values(err.errors).map((error) => error.message).join(', ')}`;
@@ -22,17 +24,17 @@ const createCard = (req, res) => {
         res.status(500).send({ message: 'An error has occured on the server' });
       }
     });
-}
+};
 
 const deleteCard = (req, res) => {
-  const { cardId } = req.params
+  const { cardId } = req.params;
 
   Card.findByIdAndDelete(cardId)
     .orFail(() => {
-      const error = new Error("No card found with that ID")
-      error.status = 404
+      const error = new Error('No card found with that ID');
+      error.status = 404;
 
-      throw error
+      throw error;
     })
     .then((card) => res.status(200).send({ message: 'The card has been successfully deleted', data: card }))
     .catch((err) => {
@@ -44,11 +46,11 @@ const deleteCard = (req, res) => {
         res.status(500).send({ message: 'An error has occured on the server' });
       }
     });
-}
+};
 
 const updateLikes = (req, res, operator) => {
-  const cardId = req.params.cardId
-  const userId = req.user._id
+  const { cardId } = req.params;
+  const userId = req.user._id;
 
   Card.findByIdAndUpdate(
     cardId,
@@ -56,10 +58,10 @@ const updateLikes = (req, res, operator) => {
     { new: true },
   )
     .orFail(() => {
-      const error = new Error("No card found with that ID")
-      error.status = 404
+      const error = new Error('No card found with that ID');
+      error.status = 404;
 
-      throw error
+      throw error;
     })
     .then((card) => res.status(200).send({ data: card }))
     .catch((err) => {
@@ -71,16 +73,16 @@ const updateLikes = (req, res, operator) => {
         res.status(500).send({ message: 'An error has occured on the server' });
       }
     });
-}
+};
 
-const likeCard = (req, res) => updateLikes(req, res, '$addToSet')
+const likeCard = (req, res) => updateLikes(req, res, '$addToSet');
 
-const dislikeCard = (req, res) => updateLikes(req, res, '$pull')
+const dislikeCard = (req, res) => updateLikes(req, res, '$pull');
 
 module.exports = {
   getAllCards,
   createCard,
   deleteCard,
   likeCard,
-  dislikeCard
+  dislikeCard,
 };
