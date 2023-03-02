@@ -43,16 +43,10 @@ const createUser = (req, res) => {
     });
 };
 
-const updateAvatar = (req, res) => {
-  const { avatar } = req.body;
+const updateUserData = (req, res) => {
+  const body = req.body;
 
-  const id = req.user._id
-
-  if (!avatar) {
-    return res.status(400).send({ message: 'Please fill-in avatar field' })
-  }
-
-  User.findByIdAndUpdate(id, { avatar }, { new: true })
+  User.findByIdAndUpdate(id, body, { new: true })
     .orFail(() => {
       const error = new Error(`No user found with ID of ${req.user._id}`);
       throw error;
@@ -71,9 +65,34 @@ const updateAvatar = (req, res) => {
     });
 };
 
+const updateProfile = (req, res) => {
+  const { name, about } = req.body;
+
+  const id = req.user._id
+
+  if (!name || !about) {
+    return res.status(400).send({ message: 'Please fill-in name and about fields' })
+  }
+
+  updateUserData(req, res);
+};
+
+const updateAvatar = (req, res) => {
+  const { avatar } = req.body;
+
+  const id = req.user._id
+
+  if (!avatar) {
+    return res.status(400).send({ message: 'Please fill-in avatar field' })
+  }
+
+  updateUserData(req, res);
+};
+
 module.exports = {
   getAllUsers,
   getUser,
   createUser,
-  updateAvatar
+  updateAvatar,
+  updateProfile
 };
