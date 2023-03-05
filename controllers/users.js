@@ -66,7 +66,7 @@ const updateUserData = (req, res) => {
         res.status(400).send({ message: 'Invalid ID format' });
       } else if (err.status === 404) {
         res.status(404).send({ message: err.message });
-      } else if (err.status === 500) {
+      } else {
         res.status(500).send({ message: 'An error has occured on the server' });
       }
     });
