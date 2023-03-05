@@ -3,8 +3,12 @@ const User = require('../models/user');
 const getAllUsers = (req, res) => {
   User.find({})
     .then((users) => res.status(200).send({ data: users }))
-    .catch(() => res.status(500).send({ message: 'An error has occured on the server' }));
-};
+    .catch(() => {
+      const error = new Error('An error has occured on the server');
+      error.status = 500;
+      throw error;
+    })
+}
 
 const getUser = (req, res) => {
   const { id } = req.params;
