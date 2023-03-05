@@ -24,7 +24,9 @@ app.use('/users', userRouter);
 app.use('/cards', cardRouter);
 
 app.use('*', (req, res) => {
-  res.status(404).send({ message: 'Requested resource not found' });
+  const error = new Error('Requested resource not found');
+  error.status = 404;
+  throw error;
 });
 
 app.listen(PORT, () => {
