@@ -14,7 +14,8 @@ const getUser = (req, res) => {
   const { id } = req.params;
   User.findById(id)
     .orFail(() => {
-      const error = new Error(`No user found with ID of ${req.params.id}`);
+      const error = new Error('No user found with ID of ${ req.user._id }');
+      error.status = 404;
       throw error;
     })
     .then((users) => {
