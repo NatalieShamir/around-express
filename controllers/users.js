@@ -2,7 +2,7 @@ const User = require('../models/user');
 
 const getAllUsers = (req, res) => {
   User.find({})
-    .then((users) => res.status(200).send({ data: users }))
+    .then((users) => res.send({ data: users }))
     .catch(() => {
       const error = new Error('An error has occured on the server');
       error.status = 500;
@@ -19,7 +19,7 @@ const getUser = (req, res) => {
       throw error;
     })
     .then((users) => {
-      res.status(200).send({ data: users });
+      res.send({ data: users });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
