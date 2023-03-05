@@ -2,7 +2,7 @@ const Card = require('../models/card');
 
 const getAllCards = (req, res) => {
   Card.find({})
-    .then((cards) => res.status(200).send({ data: cards }))
+    .then((cards) => res.send({ data: cards }))
     .catch(() => res.status(500).send({ message: 'An error has occured on the server' }));
 };
 
@@ -39,7 +39,7 @@ const deleteCard = (req, res) => {
 
       throw error;
     })
-    .then((card) => res.status(200).send({ message: 'The card has been successfully deleted', data: card }))
+    .then((card) => res.send({ message: 'The card has been successfully deleted', data: card }))
     .catch((err) => {
       if (err.name === 'CastError') {
         res.status(400).send({ message: 'Invalid ID format' });
@@ -66,7 +66,7 @@ const updateLikes = (req, res, operator) => {
 
       throw error;
     })
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.name === 'CastError') {
         res.status(400).send({ message: 'Invalid ID format' });
