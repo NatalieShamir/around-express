@@ -63,7 +63,7 @@ const updateUserData = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(400).send('Invalid ID format');
+        res.status(400).send({ message: 'Invalid ID format' });
       } else if (err.status === 404) {
         res.status(404).send({ message: err.message });
       } else if (err.status === 500) {
