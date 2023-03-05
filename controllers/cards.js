@@ -42,7 +42,7 @@ const deleteCard = (req, res) => {
     .then((card) => res.status(200).send({ message: 'The card has been successfully deleted', data: card }))
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(400).send('Invalid card ID format');
+        res.status(400).send({ message: 'Invalid ID format' });
       } else if (err.status === 404) {
         res.status(404).send({ message: err.message });
       } else if (err.status === 500) {
@@ -69,7 +69,7 @@ const updateLikes = (req, res, operator) => {
     .then((card) => res.status(200).send({ data: card }))
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(400).send('Invalid card ID format');
+        res.status(400).send({ message: 'Invalid ID format' });
       } else if (err.status === 404) {
         res.status(404).send({ message: err.message });
       } else if (err.status === 500) {
