@@ -7,8 +7,8 @@ const getAllUsers = (req, res) => {
       const error = new Error('An error has occured on the server');
       error.status = 500;
       throw error;
-    })
-}
+    });
+};
 
 const getUser = (req, res) => {
   const { id } = req.params;

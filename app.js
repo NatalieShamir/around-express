@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/aroundb');
 app.use('/users', userRouter);
 app.use('/cards', cardRouter);
 
-app.use('*', (req, res) => {
+app.use('*', () => {
   const error = new Error('Requested resource not found');
   error.status = 404;
   throw error;
