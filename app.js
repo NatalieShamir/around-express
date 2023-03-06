@@ -1,8 +1,19 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit')
 const mongoose = require('mongoose');
 
 const { PORT = 3000 } = process.env;
 const app = express();
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+app.use(limiter)
+
 const bodyParser = require('body-parser');
 const { userRouter } = require('./routes/users');
 const { cardRouter } = require('./routes/cards');
