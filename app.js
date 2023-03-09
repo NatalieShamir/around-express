@@ -18,6 +18,8 @@ const bodyParser = require('body-parser');
 const { userRouter } = require('./routes/users');
 const { cardRouter } = require('./routes/cards');
 
+const { NOT_FOUND_STATUS, NOT_FOUND_ERR_MESSAGE } = require('./utils');
+
 app.use((req, res, next) => {
   req.user = {
     _id: '63ff36be8d3ba41c9b7ff7c1',
@@ -34,10 +36,8 @@ mongoose.connect('mongodb://localhost:27017/aroundb');
 app.use('/users', userRouter);
 app.use('/cards', cardRouter);
 
-app.use('*', () => {
-  const error = new Error('Requested resource not found');
-  error.status = 404;
-  throw error;
+app.use('*', (req, res) => {
+  res.status(NOT_FOUND_STATUS).send(NOT_FOUND_ERR_MESSAGE);
 });
 
 app.listen(PORT, () => {
