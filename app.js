@@ -20,6 +20,12 @@ const { cardRouter } = require('./routes/cards');
 
 const { NOT_FOUND_STATUS, NOT_FOUND_ERR_MESSAGE } = require('./utils');
 
+const allowedCors = [
+  'https://practicum.tk',
+  'http://practicum.tk',
+  'localhost:3000'
+];
+
 app.use((req, res, next) => {
   req.user = {
     _id: '63ff36be8d3ba41c9b7ff7c1',
