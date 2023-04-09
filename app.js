@@ -29,6 +29,9 @@ const allowedCors = [
 app.use(function (req, res, next) {
   const { origin } = req.headers;
 
+  if (allowedCors.includes(origin)) {
+  }
+
   req.user = {
     _id: '63ff36be8d3ba41c9b7ff7c1',
   };
