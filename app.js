@@ -26,7 +26,9 @@ const allowedCors = [
   'localhost:3000'
 ];
 
-app.use((req, res, next) => {
+app.use(function (req, res, next) {
+  const { origin } = req.headers;
+
   req.user = {
     _id: '63ff36be8d3ba41c9b7ff7c1',
   };
