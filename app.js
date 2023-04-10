@@ -23,14 +23,14 @@ const { NOT_FOUND_STATUS, NOT_FOUND_ERR_MESSAGE } = require('./utils');
 const allowedCors = [
   'https://practicum.tk',
   'http://practicum.tk',
-  'localhost:3000'
+  'localhost:3000',
 ];
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   const { origin } = req.headers;
-
+  const { method } = req;
   if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Origin', '*');
   }
 
   req.user = {
