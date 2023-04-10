@@ -29,6 +29,8 @@ const allowedCors = [
 app.use((req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
+  const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE";
+
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', '*');
   }
