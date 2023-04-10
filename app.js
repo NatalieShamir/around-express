@@ -35,6 +35,10 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
   }
 
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+  }
+
   req.user = {
     _id: '63ff36be8d3ba41c9b7ff7c1',
   };
